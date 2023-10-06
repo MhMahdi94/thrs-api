@@ -19,7 +19,7 @@ class LeaveSlotsController extends Controller
     {
         //
         return SlotLeaveResource::collection(
-            SlotLeave::query()->orderBy('id','asc')->paginate(10)
+            SlotLeave::query()->orderBy('id', 'asc')->paginate(10)
         );
     }
 
@@ -42,16 +42,22 @@ class LeaveSlotsController extends Controller
     public function store(StoreSlotLeaveRequest $request)
     {
         //
-        $data=$request->validated();
+        
         try {
             //code...
-            $department=SlotLeave::create($data);
-        return response($department,201);
+            $data = $request->validated();
+            $leave=array();
+            foreach ($data['leave_date'] as $leave_date) {
+                //$leave['user_id']=$data['user_id'];
+                //$leave['leave_date']=$leave_date;
+                $leave = SlotLeave::create($leave_date);
+            }
+
+            return response(count( $data['leave_date']), 201);
         } catch (\Throwable $th) {
-            //throw $th;
-        return response($th,201);
+            throw $th;
+            // return response($th,201);
         }
-        
     }
 
     /**
@@ -100,12 +106,10 @@ class LeaveSlotsController extends Controller
         try {
             //code...
             $slotLeave->delete();
-            return response('',204);
-    
+            return response('', 204);
         } catch (\Throwable $th) {
             //throw $th;
-            return response($th,204);
-    
+            return response($th, 204);
         }
     }
 }

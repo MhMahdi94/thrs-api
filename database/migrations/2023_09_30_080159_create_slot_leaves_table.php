@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('slot_leaves', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('leave_month');
+            $table->string('leave_date');
             $table->timestamps();
         });
     }

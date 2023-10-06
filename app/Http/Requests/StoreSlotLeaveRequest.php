@@ -26,7 +26,7 @@ class StoreSlotLeaveRequest extends FormRequest
         return [
             //
             'user_id'=>'required|integer',
-            'leave_month'=>'required|string',
+            'leave_date'=>'required',
         ];
     }
 }

@@ -10,6 +10,6 @@ class SlotLeave extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'leave_month',
+        'leave_date',
     ];
 }
