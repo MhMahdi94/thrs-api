@@ -85,30 +85,38 @@ class EmployeeController extends Controller
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
         //
-        $data = $request->validated();
+        try {
+            //code...
+            $data = $request->validated();
         $data['password'] = bcrypt($request['password']);
         $data['name'] = $request['name'];
         $data['mobileNo'] = $request['mobileNo'];
         $data['role'] = $request['role'];
         $data['email'] = $request['email'];
-
+        $userId=$request['userId'];
+        
         DB::table('users')
-            ->where('id', $request['id'])
+            ->where('id', $userId)
             ->limit(1)
             ->update($data);
-        //return;
-        //employement data
+        // //return;
+         //employement data
         $infoData = $request['infoData'];
         $employee->update($infoData);
 
-        //allownece
+        // //allownece
         foreach ($request['allowances'] as $allowance) {
             DB::table('allowences')
-                ->where('user_id', $request['id'])
+                ->where('user_id', $userId)
                 ->limit(1)
                 ->update($allowance);
-        }
+       }
         return $request;
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
+        
     }
 
     /**

@@ -27,15 +27,15 @@ class UpdateUserRequest extends FormRequest
         return [
             'name'=>'string|max:55',
             'email'=>'email|unique:users,email,'.$this->id,
-            'companyName'=>'string|max:55',
-            'mobileNo'=>'string|max:16',
-            'status'=>'boolean',
-            'password'=>[
-                'confirmed',
-                Password::min(8)
-                ->letters()
-                ->symbols()
-            ]
+            //'companyName'=>'string|max:55',
+            'mobileNo'=>'',//'string|max:16',
+            //'status'=>'boolean',
+            // 'password'=>[
+            //     'confirmed',
+            //     Password::min(8)
+            //     ->letters()
+            //     ->symbols()
+            // ]
         ];
     }
 }

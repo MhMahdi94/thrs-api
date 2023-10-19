@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(50)->create();
        // Company::factory(10)->create();
         Salary::factory(20)->create();
-        Attendence::factory(20)->create();
+//        Attendence::factory(20)->create();
         Role::factory()->create([
             'role'=>'super'
         ]);
@@ -43,7 +43,9 @@ class DatabaseSeeder extends Seeder
             'role'=>'admin',
             'status'=>false,
             'mobileNo'=>'0110102386'
-        ])->create();
+        ],
+        
+        )->create();
 
         JobType::factory()
             ->count(4)

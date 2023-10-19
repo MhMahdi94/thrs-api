@@ -5,18 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Attendence extends Model
+class LeaveRequest extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id',
+        'startLeave',
+        'endLeave',
+        'leaveType',
+        'reason',
         'user_id',
-        'company_id',
-        'status',
-        'isConfirm',
-        'date',
-        'check_in',
-        'check_out',
-        'created_at'
+        'company_id'
     ];
 }

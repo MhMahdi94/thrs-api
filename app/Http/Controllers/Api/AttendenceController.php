@@ -35,10 +35,16 @@ class AttendenceController extends Controller
     public function store(StoreAttendenceRequest $request)
     {
         //
-        $data=$request->validated();
-        $attendece=Attendence::create($data);
-        
-        return response(new AttendenceResource($attendece),201);
+        try {
+            //code...
+            $data=$request->validated();
+            $attendece=Attendence::create($data);
+            
+            return response(new AttendenceResource($attendece),201);
+    
+        } catch (\Throwable $th) {
+            return $th;
+        }
     }
 
     /**
@@ -50,7 +56,7 @@ class AttendenceController extends Controller
     public function show(Attendence $attendence)
     {
         //
-        return AttendenceResource::collection(Attendence::query()->where('user_id',$attendence['user_id'])->paginate(10));// $attendence;
+        return Attendence::query()->where('user_id',Auth::id())->latest()->get()[0];//AttendenceResource::collection(Attendence::query()->where('user_id',$attendence['user_id'])->paginate(10));// $attendence;
     }
 
     /**
@@ -70,7 +76,7 @@ class AttendenceController extends Controller
     
             //code...
         } catch (\Throwable $th) {
-            throw $th;
+            return $th;
         }
     }
 

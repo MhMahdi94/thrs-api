@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attendences', function (Blueprint $table) {
+        Schema::create('leave_requests', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
             $table->integer('company_id');
+            $table->integer('leaveType');
+            $table->string('startLeave');
+            $table->string('endLeave');
             $table->boolean('status')->default(false);
-            $table->boolean('isConfirm')->default(false);
-            $table->string('date');
-            $table->string('check_in');
-            $table->string('check_out');
+            $table->string('reason')->default('N/A');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendences');
+        Schema::dropIfExists('leave_requests');
     }
 };

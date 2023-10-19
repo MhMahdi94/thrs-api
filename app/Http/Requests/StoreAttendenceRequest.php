@@ -26,7 +26,8 @@ class StoreAttendenceRequest extends FormRequest
         return [
             //
             'user_id'=>'required',
-           // 'company_id'=>'required',
+            'company_id'=>'required',
+            'date'=>'required',
             'check_in'=>'required',
             'check_out'=>'required',
         ];

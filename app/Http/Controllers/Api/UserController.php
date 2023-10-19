@@ -59,13 +59,20 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $data=$request->validated();
+        try {
+            //code...
+            $data=$request->validated();
         if(isset($data['password'])){
             $data['password']=bcrypt($data['password']);
         }
 
         $user->update($data);
-        return new UserResource($user);
+        return $request;
+        } catch (\Throwable $th) {
+            throw $th;
+            //return response($th,400);
+        }
+        
     }
 
     /**
