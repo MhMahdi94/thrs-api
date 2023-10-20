@@ -51,13 +51,14 @@ class EmployeeController extends Controller
         //employement data
         $infoData = $request['infoData'];
         $infoData['user_id'] = $user['id'];
-     $infoData['company_id']=Auth::id();
+        $infoData['company_id']=Auth::id();
         Employee::create($infoData);
+       
         foreach ($request['allowances'] as $allowance) {
             $allowance['user_id'] = $user['id'];
             Allowence::create($allowance);
         }
-        return $request; //response(new EmployeeResource($user),201);
+         return response($request,201);; //response(new EmployeeResource($user),201);
     }
 
     /**

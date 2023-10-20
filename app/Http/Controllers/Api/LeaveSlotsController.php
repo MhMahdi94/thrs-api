@@ -69,6 +69,7 @@ class LeaveSlotsController extends Controller
     public function show(SlotLeave $slotLeave)
     {
         //
+        return new SlotLeaveResource($slotLeave);
     }
 
     /**
