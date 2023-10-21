@@ -56,7 +56,7 @@ class AttendenceController extends Controller
     public function show(Attendence $attendence)
     {
         //
-        return Attendence::query()->where('user_id',Auth::id())->latest()->get()[0];//AttendenceResource::collection(Attendence::query()->where('user_id',$attendence['user_id'])->paginate(10));// $attendence;
+        return $attendence;//Attendence::query()->where('user_id',$attendence['user_id'])->latest()->get()[0];//AttendenceResource::collection(Attendence::query()->where('user_id',$attendence['user_id'])->paginate(10));// $attendence;
     }
 
     /**

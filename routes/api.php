@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AttendenceStatusController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\DepartmentController;
+use App\Http\Controllers\Api\EmployeeAttendenceController;
 use App\Http\Controllers\Api\EmployeeController;
 
 use App\Http\Controllers\Api\GetUserController;
@@ -57,6 +58,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/leave-request',LeaveRequestController::class);
     Route::apiResource('/leave-check',LeaveCheckController::class);
     Route::apiResource('/attendence-status',AttendenceStatusController::class);
+    Route::apiResource('/attendence-employee',EmployeeAttendenceController::class);
     //admin
     Route::apiResource('/admin/leave-request',AdminLeaveRequestController::class);
     // Route::put('/new-request/{id}',[NewRequestController::class,'update']);
