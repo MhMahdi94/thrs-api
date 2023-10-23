@@ -7,7 +7,7 @@ const SectionCard = ({icon,title,subTitle}) => {
             {icon}
             <a href="#" class="block  text-center ">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-600">{title}</h5>
-                <p class="font-normal text-gray-500">{subTitle}</p>
+                <p class="font-normal text-gray-500 text-start">{subTitle}</p>
             </a>
         </div>
     
