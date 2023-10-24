@@ -18,7 +18,9 @@ if(isset($_SERVER['HTTP_ORIGIN'])&&$_SERVER['HTTP_ORIGIN'] != ''){
             header('Access-Control-Max-Age: 1728000');
             header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Authorization, 
             X-Requested-With, Content-Range, Content-Disposition, Content-Description, x-xsrf-token, ip');
+            break;
         }  
+
     }
 }
 /*
