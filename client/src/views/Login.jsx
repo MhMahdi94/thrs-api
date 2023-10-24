@@ -28,9 +28,9 @@ const Login = () => {
         navigate('../');
       })
       .catch((error)=>{
-        // console.log(error);
+         console.log(error);
         const respone=error.response;
-        console.log(respone.data.message);
+        console.log(respone);
         if(respone && respone.status===422){
           console.log(respone.data.errors);
           setErrors(respone.data.errors);
