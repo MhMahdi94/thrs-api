@@ -46,7 +46,7 @@ class LeaveSlotsController extends Controller
         try {
             //code...
             $data = $request->validated();
-            $leave=array();
+            //$leave=array();
             foreach ($data['leave_date'] as $leave_date) {
                 //$leave['user_id']=$data['user_id'];
                 //$leave['leave_date']=$leave_date;
@@ -55,7 +55,7 @@ class LeaveSlotsController extends Controller
 
             return response(count( $data['leave_date']), 201);
         } catch (\Throwable $th) {
-            throw $th;
+            return $th;
             // return response($th,201);
         }
     }

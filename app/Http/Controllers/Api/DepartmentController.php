@@ -35,6 +35,7 @@ class DepartmentController extends Controller
         //
         $data=$request->validated();
         // $data['password']=bcrypt($data['password']);
+        $data['attendence']=$request['auth']['attendence'];
         $department=Department::create($data);
         try {
             //code...
@@ -69,7 +70,7 @@ class DepartmentController extends Controller
     {
         //
         $data=$request->validated();
-        
+        $data['attendence']=$request['auth']['attendence'];
 
         $department->update($data);
         return new DepartmentResource($department);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\LeaveRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\LeaveCheckResource;
 use App\Models\SlotLeave;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,16 @@ class LeaveCheckController extends Controller
     public function create()
     {
         //
+        try {
+            //code...
+            return LeaveCheckResource::collection(
+                SlotLeave::query()->orderBy('id','asc')
+            );
+    
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
     }
 
     /**

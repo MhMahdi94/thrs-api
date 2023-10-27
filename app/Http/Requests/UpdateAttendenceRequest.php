@@ -25,12 +25,13 @@ class UpdateAttendenceRequest extends FormRequest
     {
         return [
             //
-            'user_id'=>'required',
+            'user_id'=>'',
             // 'company_id'=>'required',
              'check_in'=>'',
              'date'=>'',
-             'status'=>'required',
-             'check_out'=>'required',
+             'status'=>'',
+             'isConfirm'=>'',
+             'check_out'=>'',
         ];
     }
 }

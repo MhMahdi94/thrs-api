@@ -5,24 +5,24 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-$allowsOrigins=array(
-    'https://clever-tesla.82-165-200-34.plesk.page',//laraval
-    'http://localhost:3000/'//client
-);
-if(isset($_SERVER['HTTP_ORIGIN'])&&$_SERVER['HTTP_ORIGIN'] != ''){
-    foreach($allowsOrigins as $allowedOrigin){
-       if(preg_match('#' . $allowedOrigin . '#', $_SERVER['HTTP_ORIGIN'])){
-            header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
-            header('Access-Control-Allow-Credentials: true');
-            header('Access-Control-Allow-Methods: GET,PUT,POST,DELETE,OPTIONS');
-            header('Access-Control-Max-Age: 1728000');
-            header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Authorization, 
-            X-Requested-With, Content-Range, Content-Disposition, Content-Description, x-xsrf-token, ip');
-            break;
-        }  
+// $allowsOrigins=array(
+//     'https://clever-tesla.82-165-200-34.plesk.page',//laraval
+//     'http://localhost:3000/'//client
+// );
+// if(isset($_SERVER['HTTP_ORIGIN'])&&$_SERVER['HTTP_ORIGIN'] != ''){
+//     foreach($allowsOrigins as $allowedOrigin){
+//        if(preg_match('#' . $allowedOrigin . '#', $_SERVER['HTTP_ORIGIN'])){
+//             header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
+//             header('Access-Control-Allow-Credentials: true');
+//             header('Access-Control-Allow-Methods: GET,PUT,POST,DELETE,OPTIONS');
+//             header('Access-Control-Max-Age: 1728000');
+//             header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Authorization, 
+//             X-Requested-With, Content-Range, Content-Disposition, Content-Description, x-xsrf-token, ip');
+//             break;
+//         }  
 
-    }
-}
+//     }
+// }
 /*
 |--------------------------------------------------------------------------
 | Check If The Application Is Under Maintenance

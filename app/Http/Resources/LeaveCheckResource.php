@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Allowence;
 use App\Models\Employee;
-use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DepartmentResource extends JsonResource
+class LeaveCheckResource extends JsonResource
 {
     public static $wrap=false;
     /**
@@ -17,15 +17,10 @@ class DepartmentResource extends JsonResource
      */
     public function toArray($request)
     {
-        $employee=Employee::where('user_id',$this->head)->get();
-        $user=User::where('id',$employee[0]->user_id)->get();
         return [
             'id'=>$this->id,
-            'name'=>$this->name,
-            'attendence'=>$this->attendence,
-            'head'=>$user[0]->id,
-            'headName'=>$user[0]->name,
-            'company_id'=>$this->company_id,
+            'user_idd'=>$this->user_id,
+            'leave_date'=>$this->leave_date,
             'created_at'=>$this->created_at->format('Y-m-d H:i:s'),
         ];
     }

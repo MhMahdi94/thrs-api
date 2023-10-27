@@ -12,6 +12,7 @@ class Department extends Model
         'id',
         'name',
         'head',
-        'company_id'
+        'company_id',
+        'attendence'
     ];
 }

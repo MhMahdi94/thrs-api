@@ -31,6 +31,7 @@ class StoreDepartmentRequest extends FormRequest
              
              'name'=>'required|string|max:64',
              'head'=>'integer',
+             'auth'=>''
              
         ];
     }

@@ -11,5 +11,6 @@ class SlotLeave extends Model
     protected $fillable = [
         'user_id',
         'leave_date',
+        'status',
     ];
 }

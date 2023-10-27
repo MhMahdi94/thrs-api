@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Allowence;
+use App\Models\Department;
 use App\Models\Employee;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,11 +20,22 @@ class UserResource extends JsonResource
     {
         $employee=Employee::where('user_id',$this->id)->get();
         $allowence=Allowence::where('user_id',$this->id)->get();
+        $department=Department::where('head',$this->id)->get();
+       
+        if($department!=[]){
+            $data['head']=$department[0]->head;
+            $data['attendence']=$department[0]->attendence;
+            
+        }else{
+            $data['head']= -1;
+        }
+        
         return [
             'id'=>$this->id,
             'uid'=>$this->uid,
             'name'=>$this->name,
             'email'=>$this->email,
+            'department'=>$data,
             'employee'=>$employee[0]??[],
             'allowence'=>$allowence??[],
             'comapnyName'=>$this->comapnyName,

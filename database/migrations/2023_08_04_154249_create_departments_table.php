@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('head');
             $table->integer('company_id');
+            $table->boolean('attendence')->default(false);
             $table->timestamps();
         });
     }

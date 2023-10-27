@@ -27,6 +27,7 @@ class StoreSlotLeaveRequest extends FormRequest
             //
             'user_id'=>'required|integer',
             'leave_date'=>'required',
+            //'status'=>'required'
         ];
     }
 }
