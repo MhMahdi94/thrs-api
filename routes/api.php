@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\DepartmentController;
 use App\Http\Controllers\Api\EmployeeAttendenceController;
 use App\Http\Controllers\Api\EmployeeController;
-
+use App\Http\Controllers\Api\EmployeeSummaryController;
 use App\Http\Controllers\Api\GetUserController;
 use App\Http\Controllers\Api\LeaveCheckController;
 use App\Http\Controllers\Api\LeaveRequestController;
@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\PackageController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\SalaryController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\SummaryController;
 use App\Models\LeaveSlot;
 use App\Models\NewRequest;
 use Illuminate\Http\Request;
@@ -60,6 +61,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/leave-check',LeaveCheckController::class);
     Route::apiResource('/attendence-status',AttendenceStatusController::class);
     Route::apiResource('/attendence-employee',EmployeeAttendenceController::class);
+    Route::apiResource('/summary',EmployeeSummaryController::class);
     //admin
     Route::apiResource('/admin/leave-request',AdminLeaveRequestController::class);
     // Route::put('/new-request/{id}',[NewRequestController::class,'update']);
