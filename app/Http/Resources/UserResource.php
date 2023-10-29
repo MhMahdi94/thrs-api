@@ -20,6 +20,7 @@ class UserResource extends JsonResource
     {
         $employee=Employee::where('user_id',$this->id)->get();
         $allowence=Allowence::where('user_id',$this->id)->get();
+        if($this->role == 'employee'){
         $department=Department::where('head',$this->id)->get();
        
         if($department!=[]){
@@ -29,13 +30,17 @@ class UserResource extends JsonResource
         }else{
             $data['head']= -1;
         }
+
+        }else{
+            $data['head']= -1;
+        }
         
         return [
             'id'=>$this->id,
             'uid'=>$this->uid,
             'name'=>$this->name,
             'email'=>$this->email,
-            'department'=>$data,
+            'department'=>$data??'',
             'employee'=>$employee[0]??[],
             'allowence'=>$allowence??[],
             'comapnyName'=>$this->comapnyName,
