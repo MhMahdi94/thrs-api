@@ -24,8 +24,15 @@ class AuthController extends Controller
        /** @var User $user */
        $user=Auth::user();
        $token=$user->createToken('main')->plainTextToken;
-
-       return response(compact('user','token'));
+       //$response->header('X-App-Message', 'Hello world');
+    //    "Access-Control-Allow-Headers": "*",
+    //    "Access-Control-Allow-Origin": "*",
+    //    "Access-Control-Allow-Methods": "*"  
+       return response(compact('user','token')) 
+        -> header('Access-Control-Allow-Headers', '*')
+        -> header('Access-Control-Allow-Origin', '*')
+        -> header('Access-Control-Allow-Methods', '*')
+       ;
     }
 
     public function signup(signupRequest $request){
