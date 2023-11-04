@@ -19,7 +19,7 @@ class LeaveCheckResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'user_idd'=>$this->user_id,
+            'user_id'=>$this->user_id,
             'leave_date'=>$this->leave_date,
             'created_at'=>$this->created_at->format('Y-m-d H:i:s'),
         ];

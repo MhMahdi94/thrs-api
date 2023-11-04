@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\PackageController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\SalaryController;
+use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\NotificationTokensController;
 use App\Http\Controllers\SummaryController;
@@ -45,9 +46,11 @@ Route::middleware('auth:sanctum')->group(function(){
     });
 
     Route::post('/logout',[AuthController::class,'logout']);
-
+    //search
+    Route::post('/employee-search',[SearchController::class,'employees_search']);
+    Route::post('/department-search',[SearchController::class,'departments_search']);
+   
     Route::apiResource('/current-user',GetUserController::class);
-
     Route::apiResource('/users',UserController::class);
     Route::apiResource('/companies',CompanyController::class);
     Route::apiResource('/roles',RoleController::class);
@@ -69,8 +72,12 @@ Route::middleware('auth:sanctum')->group(function(){
     //admin
     Route::apiResource('/admin/leave-request',AdminLeaveRequestController::class);
     // Route::put('/new-request/{id}',[NewRequestController::class,'update']);
+
+    
 }) ;
 
 Route::post('/signup',[AuthController::class,'signup']);
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/new-request',[NewRequestController::class,'store']);
+
+

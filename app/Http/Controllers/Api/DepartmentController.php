@@ -19,9 +19,8 @@ class DepartmentController extends Controller
     {
         //
         return //DepartmentResource::collection(
-            Department::query()->orderBy('id','asc')->paginate(10)
-        //)
-        ;
+            Department::query()->orderBy('id','asc')->paginate(10);
+        //);
     }
 
     /**

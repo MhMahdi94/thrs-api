@@ -8,7 +8,8 @@ import LoadingSpinner from '../components/LoadingSpinner';
 const Salaries = () => {
   const [salaries, setSalaries] = useState([]);
   const [loading, setLoading]=useState(false);
-  const headers=['ID','Name','Salary','Allowences','Deduction'];//,'Created At'];
+  const [employees, setEmployees] = useState([]);
+  const headers=[/*'ID',*/'Name','Salary','Allowences','Deduction'];//,'Created At'];
   const months=[
     {'id':1,'name':'January'}, 
     {'id':2,'name':'February'},
@@ -35,8 +36,63 @@ const Salaries = () => {
         console.log(error);
       });
   }
+
+  const getEmployees = () => {
+    setLoading(true);
+    axiosClient.get('/employees')
+      .then(({ data }) => {
+
+        console.log(data);
+        setLoading(false);
+        //setLinks(data.links);
+        //setMeta(data.meta);
+        setEmployees(data.data);
+        
+       // console.log(meta);
+        
+        
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+        // setLoading(false);
+      })
+  }
+
+  const searchTable=(e)=>{
+    e.preventDefault();
+    console.log(e.target.value);
+    //return;
+     if(e.target.value.length >2){
+    setLoading(true);
+    axiosClient.post('/employee-search',{search:e.target.value})
+      .then(({ data }) => {
+
+        console.log(data);
+        setLoading(false);
+        
+       // setLinks(data.links);
+       // setMeta(data.meta);
+        setEmployees(data.data);
+        
+        
+        
+        
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+        // setLoading(false);
+      })
+     }else{
+      getEmployees();
+     }
+  
+}
+
   useEffect(() => {
-    getSalaries();
+    getEmployees();
+    //getSalaries();
   }, []);
   
   return (
@@ -72,15 +128,19 @@ const Salaries = () => {
                 <tbody>
 
                     {loading ? null:
-                        salaries.map((salary) => {
+                        employees.map((employee) => {
+                            var allowences=0;
+                            employee.allowence.map(e=>{
+                                allowences=allowences+e.allVal;
+                            })
                             return (
 
-                                <tr key={salary.id} >
-                                    <td className="px-4 py-3">{salary.id}</td>
-                                    <td className="px-4 py-3">{salary.user[0].name}</td>
-                                    <td className="px-4 py-3">{salary.salary}</td>
-                                    <td className="px-4 py-3">{salary.allowences}</td>
-                                    <td className="px-4 py-3">{salary.deductions}</td>
+                                <tr key={employee.id} >
+                                    {/* <td className="px-4 py-3">{salary.id}</td> */}
+                                    <td className="px-4 py-3">{employee.user[0].name}</td>
+                                    <td className="px-4 py-3">{employee.salary}</td>
+                                    <td className="px-4 py-3">{allowences}</td>
+                                    <td className="px-4 py-3">{0}</td>
                                     
                                     {/* <td className="px-4 py-3">{salary.created_at}</td> */}
                                     <td>

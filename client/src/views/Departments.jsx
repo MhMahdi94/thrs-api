@@ -6,6 +6,7 @@ import NavigateButton from '../components/NavigateButton';
 import axiosClient from '../axiosClient';
 import { useStateContext } from '../context/ContextProvider';
 import ActionButton from '../components/ActionButton';
+import SearchBar from '../components/SearchBar';
 
 
 const Departments = () => {
@@ -25,40 +26,73 @@ const Departments = () => {
     //     {id:6,name:'Department Name',head:'Mohammed Mahdy',email:'mahdy@email.com',start:'1-1-2023',createdAt:'1-1-2023'},
     //   ];
 
-      const getDepartments=()=>{
-        setLoading(true);
-        axiosClient.get('/departments')
-          .then(({data})=>{
-         
-            console.log(data);
-            setDepartments(data.data);
-            setMeta(data.meta);
-            setLinks(data.links);
-            setLoading(false);
-          })
-          .catch((error)=>{
-            console.log(error);
-            setLoading(false);
-            // setLoading(false);
-          })
-        }
-        const onDelete=(department)=>{
-          console.log(department);
-          //  setShowModal(true);
-          if(!window.confirm('Are you want to delete this department?')){
-            return;
-          }
-    
-          axiosClient.delete(`departments/${department.id}`)
-            .then(()=>{
-              setNotification('Department was successfully deleted.')
-    
-              getDepartments();
-            })
-        }
-        useEffect(() => {
-          getDepartments();
-        }, [])
+  const getDepartments = () => {
+    setLoading(true);
+    axiosClient.get('/departments')
+      .then(({ data }) => {
+
+        console.log(data);
+        setDepartments(data.data);
+        setMeta(data.meta);
+        setLinks(data.links);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+        // setLoading(false);
+      })
+  }
+  const onDelete = (department) => {
+    console.log(department);
+    //  setShowModal(true);
+    if (!window.confirm('Are you want to delete this department?')) {
+      return;
+    }
+
+    axiosClient.delete(`departments/${department.id}`)
+      .then(() => {
+        setNotification('Department was successfully deleted.')
+
+        getDepartments();
+      })
+  }
+
+  const searchTable=(e)=>{
+    e.preventDefault();
+    console.log(e.target.value);
+    //return;
+     if(e.target.value.length >2){
+    setLoading(true);
+    axiosClient.post('/departments-search',{search:e.target.value})
+      .then(({ data }) => {
+
+        console.log(data);
+        setLoading(false);
+        
+        setLinks(data.links);
+        setMeta(data.meta);
+        setDepartments(data.data);
+        
+        
+        
+        
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+        // setLoading(false);
+      })
+     }else{
+      getDepartments();
+     }
+  
+  }
+
+
+  useEffect(() => {
+    getDepartments();
+  }, [])
         
   return (
     <div>
@@ -67,8 +101,9 @@ const Departments = () => {
         {/* <!-- Start coding here --> */}
         <div className="bg-white  relative shadow-md sm:rounded-lg overflow-hidden">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-            <div className="w-full md:w-1/2">
-            <form className="flex items-center">
+          <div className="w-full md:w-1/2">
+            <h4 className='text-xl font-medium text-gray-900'>Departments</h4>
+              {/* <form className="flex items-center" >
                 <label htmlFor="simple-search" className="sr-only">Search</label>
                 <div className="relative w-full">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -76,9 +111,9 @@ const Departments = () => {
                       <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <input type="text" id="simple-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 " placeholder="Search" required="" />
+                  <input onChange={searchTable} type="text" id="simple-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full pl-10 p-2 " placeholder="Search" required="" />
                 </div>
-              </form>
+              </form> */}
             </div>
             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
               {loading && <LoadingSpinner/>}
@@ -91,9 +126,9 @@ const Departments = () => {
               <thead className="text-xs text-gray-700 uppercase bg-gray-50  ">
                 <tr>
                   <th scope="col" className="px-4 py-3">Name</th>
-                  <th scope="col" className="px-4 py-3">Head</th>
+                  {/* <th scope="col" className="px-4 py-3">Head</th> */}
                   
-                  <th scope="col" className="px-4 py-3">Created At</th>
+                  {/* <th scope="col" className="px-4 py-3">Created At</th> */}
                   
                   <th scope="col" className="px-4 py-3">
                     <span className="sr-only">Actions</span>
@@ -102,11 +137,11 @@ const Departments = () => {
               </thead>
               <tbody>
                 {departments.map(department=>{
-                  return <tr className="border-b ">
+                  return <tr className="border-b " key={department.id}>
                   <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap ">{department.name}</th>
-                  <td className="px-4 py-3">{department.headName}</td>
+                  {/* <td className="px-4 py-3">{department.headName}</td> */}
                   
-                  <td className="px-4 py-3">{department.created_at}</td>
+                  {/* <td className="px-4 py-3">{department.created_at}</td> */}
                   
                   <td className="px-4 py-3 flex items-center justify-end">
                       

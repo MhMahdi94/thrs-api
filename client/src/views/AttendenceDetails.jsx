@@ -15,12 +15,13 @@ const AttendenceDetails = () => {
     const { id } = useParams();
     const getAttendences = () => {
         setLoading(true);
-        axiosClient.get(`/attendence/${id}`)
+        axiosClient.post(`/attendence-employee`,{user_id:id})
             .then(({ data }) => {
                 console.log(data);
+                
                 setAttendences(data.data);
-                setLinks(data.links);
-                setMeta(data.meta);
+               // setLinks(data.links);
+               // setMeta(data.meta);
                 setLoading(false);
             })
             .catch(({ error }) => {
@@ -81,7 +82,8 @@ const AttendenceDetails = () => {
                 <table className="w-full text-sm text-left text-gray-500 ">
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
-                      <th scope="col" className="px-4 py-3">Id</th>
+                      {/* <th scope="col" className="px-4 py-3">Id</th> */}
+                      <th scope="col" className="px-4 py-3">Date</th>
                       <th scope="col" className="px-4 py-3">Check In</th>
                       <th scope="col" className="px-4 py-3">Check Out</th>
                       
@@ -91,7 +93,8 @@ const AttendenceDetails = () => {
                    {loading? null:<tbody>
                     {attendences.map(attendence=>{
                       return <tr className="border-b " key={attendence.id}>
-                      <td className="px-4 py-3">{attendence.id}</td>
+                      {/* <td className="px-4 py-3">{attendence.id}</td> */}
+                      <td scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap ">{attendence.date}</td>
                       <td scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap ">{attendence.check_in}</td>
                       <td scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap ">{attendence.check_out}</td>
                       

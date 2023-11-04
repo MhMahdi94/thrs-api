@@ -12,9 +12,11 @@ const DepartmentAdd = () => {
     const [loading, setLoading] = useState(false);
     const [employees, setEmployees] = useState([]);
     const {user}=useStateContext();
+    const [authCheck, setAuthCheck]=useState(false);
     const [formData, setFormData] = useState({
         'name': '',
         'head': 0,
+        'auth':{'attendence':0},
         'company_id':user.id
     });
     const getEmployees=()=>{
@@ -32,13 +34,13 @@ const DepartmentAdd = () => {
             // setLoading(false);
           })
         }
-        useEffect(() => {
-            getEmployees();
-          }, [])
+    useEffect(() => {
+        getEmployees();
+    }, [])
     const handleAddDeparment=(e)=>{
         e.preventDefault();
         console.log(formData);
-        
+       // return;
         setLoading(true);
         
         axiosClient.post('/departments',formData)
@@ -54,6 +56,13 @@ const DepartmentAdd = () => {
             }
         )
     }
+
+    const attendenceCheck=(e)=>{
+        //e.preventDefault();
+        console.log(e.target.checked);
+        setFormData({...formData,auth:{attendence:e.target.checked}})
+        setAuthCheck(e.target.checked);
+    };
   return (
     <div>
         <div className="relative p-4 w-full max-w-12xl  h-full  md:h-full">
@@ -98,7 +107,10 @@ const DepartmentAdd = () => {
                             
                         </select>
                     </div> */}
-                    
+                    <div className="flex items-center">
+                        <input id="default-checkbox" onChange={attendenceCheck} type="checkbox"  checked={authCheck} className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500  focus:ring-2"/>
+                        <label for="default-checkbox" className="ml-2 text-sm font-medium text-gray-900">Attendence Authority</label>
+                    </div>
                     
                 </div>
                 {loading ? <LoadingSpinner /> : <FormButton label='Next' />}

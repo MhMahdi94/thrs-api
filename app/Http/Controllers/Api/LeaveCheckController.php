@@ -18,6 +18,21 @@ class LeaveCheckController extends Controller
     public function index()
     {
         //
+        //return 'hello';
+        $data['slots']=LeaveCheckResource::collection(
+            SlotLeave::query()->orderBy('id','asc')->get()
+        );
+        return $data;
+        // try {
+        //     //code...
+        //     return LeaveCheckResource::collection(
+        //         SlotLeave::query()->orderBy('id','asc')
+        //     );
+    
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        //     return $th;
+        // }
     }
 
     /**
@@ -30,9 +45,9 @@ class LeaveCheckController extends Controller
         //
         try {
             //code...
-            return LeaveCheckResource::collection(
-                SlotLeave::query()->orderBy('id','asc')
-            );
+            return //LeaveCheckResource::collection(
+                SlotLeave::query()->orderBy('id','asc')->get();
+            //);
     
         } catch (\Throwable $th) {
             //throw $th;
@@ -48,19 +63,20 @@ class LeaveCheckController extends Controller
      */
     public function store(Request $request)
     {
+        //return $request;
         try {
             //code...
             $data=array();
             foreach ($request['leaveSlots'] as $leaveSlot) {
                 # code...
                 // SlotLeave::query()->where('leave_date',$leaveSlot)->get();
-                $value=SlotLeave::query()->getModel()->where('leave_date',$leaveSlot)->first();
-                if($value==null){
-                    continue;
-                }else{
+                $value=SlotLeave::query()->where('leave_date',$leaveSlot)->first();
+                // if($value==null){
+                //     continue;
+                // }else{
                     array_push($data,$value);
 
-                }
+                // }
     //            $data->push($leaveSlot);
             }
             $response['slots'] = $data;
