@@ -31,6 +31,7 @@ import Packages from './views/Packages';
 import PackageAdd from './views/PackageAdd';
 import PackageEdit from './views/PackageEdit';
 import AttendenceDetails from './views/AttendenceDetails';
+import FinancialYears from './views/FinancialYears';
 
 const router = createBrowserRouter([
     {
@@ -143,6 +144,10 @@ const router = createBrowserRouter([
             {
                 path: '/leave',
                 element: <Leave />
+            },
+            {
+                path: '/financial-year',
+                element: <FinancialYears />
             },
            
         ]
