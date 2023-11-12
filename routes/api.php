@@ -70,7 +70,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/notification',NotificationController::class);
     Route::apiResource('/notification-tokens',NotificationTokensController::class);
     //admin
-    Route::apiResource('/admin/leave-request',AdminLeaveRequestController::class);
+    //Route::apiResource('/admin/leave-request',AdminLeaveRequestController::class);
     // Route::put('/new-request/{id}',[NewRequestController::class,'update']);
 
     
