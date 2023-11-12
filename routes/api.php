@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\PackageController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\SalaryController;
 use App\Http\Controllers\Api\SearchController;
+use App\Http\Controllers\Api\test\TestController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\NotificationTokensController;
 use App\Http\Controllers\SummaryController;
